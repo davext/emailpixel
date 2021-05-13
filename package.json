@@ -1,0 +1,19 @@
+{
+  "name": "emailpixel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "koa": "^2.13.1",
+    "koa-router": "latest",
+    "mongodb": "^3.6.6",
+    "shortid": "^2.2.16"
+  }
+}
