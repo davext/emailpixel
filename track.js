@@ -49,9 +49,9 @@ client.connect(err => {
                 console.log(ctx.params);
             }
 
-            ctx.set('Content-Type', 'image/jpeg');
+            ctx.set('Content-Type', 'image/gif');
 
-            await send(ctx,"./a.jpg")
+            await send(ctx,"./signature.gif")
 
         });
 
