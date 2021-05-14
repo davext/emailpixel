@@ -45,7 +45,7 @@ client.connect(err => {
 
             if(debug)
             {
-                console.log("logged - ");
+                console.log("logged - and about to write ");
                 console.log(ctx.params);
             }
 
@@ -70,6 +70,10 @@ client.connect(err => {
 
 
     router.get("/r/:id",async (ctx, next) => {
+        if(debug) {
+            console.log("about to read")
+            console.log(ctx.params);
+        }
 
         ctx.body = await collection.findOne({id:ctx.params})
 
