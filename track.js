@@ -50,6 +50,10 @@ client.connect(err => {
             }
 
             ctx.set('Content-Type', 'image/gif');
+            ctx.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
+            ctx.set('Pragma', 'no-cache');
+            ctx.set('Expires', 0);
+
 
             await send(ctx,"./signature.gif")
 
