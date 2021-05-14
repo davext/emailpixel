@@ -1,6 +1,8 @@
 const Koa = require('koa');
 var Router = require('koa-router');
 const shortid = require('shortid');
+const send = require('koa-send');
+
 require('dotenv').config()
 
 
@@ -39,7 +41,7 @@ client.connect(err => {
     router.get("/t/:id", async (ctx, next) => {
 
 
-        await collection.updateOne({id:ctx.params},{$push:{opens:ctx.headers}},{upsert: true }).then(()=>{
+        await collection.updateOne({id:ctx.params},{$push:{opens:ctx.headers}},{upsert: true }).then(async ()=>{
 
             if(debug)
             {
@@ -49,7 +51,7 @@ client.connect(err => {
 
             ctx.set('Content-Type', 'image/jpeg');
 
-            ctx.body = "lol"
+            await send(ctx,"./a.jpg")
 
         });
 
