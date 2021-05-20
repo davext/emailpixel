@@ -3,7 +3,7 @@ var Router = require('koa-router');
 const shortid = require('shortid');
 const send = require('koa-send');
 
-require('dotenv').config()
+require('dotenv').config();
 
 
 
@@ -13,24 +13,24 @@ const app = new Koa();
 
 const router = new Router();
 
-const debug = true;
+const debug = process.env.Debug;
 
 
 
 
-const uri = process.env.mongoURI
+const uri = process.env.mongoURI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
 
     if(debug)
-        console.log(err)
+        console.log(err);
 
     const collection = client.db("emailTracker").collection("emails");
     // perform actions on the collection object
 
 
     router.get('/', async (ctx, next) => {
-        ctx.status=404
+        ctx.status=404;
         ctx.body = {error:"malformed request"}
     });
 
@@ -40,6 +40,8 @@ client.connect(err => {
 
     router.get("/t/:id", async (ctx, next) => {
 
+
+        ctx.headers.timestamp = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
 
         await collection.updateOne({id:ctx.params},{$push:{opens:ctx.headers}},{upsert: true }).then(async ()=>{
 

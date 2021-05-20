@@ -1,0 +1,2 @@
+mongoURI=<Your Mongo DB URI>
+Debug=true
