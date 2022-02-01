@@ -10,11 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^9.0.2",
+    "dotenv": "^15.0.0",
     "koa": "^2.13.1",
     "koa-router": "latest",
     "koa-send": "^5.0.1",
-    "mongodb": "^3.6.6",
-    "shortid": "^2.2.16"
+    "mongodb": "^4.3.1",
+    "shortid": "2.2.16",
+    "nanoid" : "^3.2.0"
   }
 }

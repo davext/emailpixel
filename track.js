@@ -1,6 +1,6 @@
 const Koa = require('koa');
 var Router = require('koa-router');
-const shortid = require('shortid');
+const  nanoid   = require('nanoid/async')
 const send = require('koa-send');
 
 require('dotenv').config();
@@ -17,7 +17,6 @@ const debug = process.env.Debug;
 
 
 
-
 const uri = process.env.mongoURI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -26,19 +25,17 @@ client.connect(err => {
         console.log(err);
 
     const collection = client.db("emailTracker").collection("emails");
-    // perform actions on the collection object
 
-
-    router.get('/', async (ctx, next) => {
+    router.get('/', async (ctx) => {
         ctx.status=404;
         ctx.body = {error:"malformed request"}
     });
 
-    router.get('/idpls', async (ctx, next) => {
-        ctx.body = await shortid.generate()
+    router.get('/idpls', async (ctx) => {
+        ctx.body = await nanoid.nanoid()
     });
 
-    router.get("/t/:id", async (ctx, next) => {
+    router.get("/t/:id", async (ctx) => {
 
 
         ctx.headers.timestamp = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
@@ -60,18 +57,10 @@ client.connect(err => {
             await send(ctx,"./signature.gif")
 
         });
-
-
-
-
-        // console.log(ctx.params)
-
-        //log to db and send fake pic
-
     });
 
 
-    router.get("/r/:id",async (ctx, next) => {
+    router.get("/r/:id",async (ctx) => {
         if(debug) {
             console.log("about to read")
             console.log(ctx.params);
@@ -80,13 +69,6 @@ client.connect(err => {
         ctx.body = await collection.findOne({id:ctx.params})
 
     });
-    // router.post('/', (ctx, next) => {
-    //     // your post route handling
-    // });
-
-
-
-
 
     app
         .use(router.routes())
